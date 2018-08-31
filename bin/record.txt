@@ -1,0 +1,1 @@
+deploy_model=standalone , appName=calc_source_test_zean_m_offset_d_11_20180831102801 , acl_username=Tu_adhpoc5  ,  acl_password=Tp_nbrvwwp  ,ip=192.168.0.201  deploy_dir=/root/spark

@@ -1,0 +1,41 @@
+/**
+* 开启任务的参数检查,现阶段不检查任务所占用的核数和cpu资源 <br/>
+* @param com.unistack.tamboo.commons.json
+*  json格式的配置文件 <br/>
+*
+* @param msg
+*   xml格式的原消息
+* @return
+*   {"code":"200","error":"错误原因","description":"描述,在正确时的描述"}
+*/
+public static JSONObject checkConf(String com.unistack.tamboo.commons.json, String msg)
+
+
+/**
+*
+* 通过type类型开启不同类型的计算任务 <br/>
+* 现阶段还没有使用这个值
+* @param com.unistack.tamboo.commons.json
+*   {"type":"calc"}
+* @return
+*   {"code":"","msg":""}
+*   code:错误码 200表示正确,其余表示错误
+*   msg:错误描述
+*/
+public static JSONObject startCalc(String com.unistack.tamboo.commons.json)
+
+
+
+/**
+*
+*
+* @param com.unistack.tamboo.commons.json
+*  {"applicationName":"calc_"}
+*   applicationName:应用程序id
+*
+* @return
+*   {"code":"","msg":""}
+*   code:错误码 200表示正确,其余表示错误
+*   msg:错误描述
+*/
+public static JSONObject stopCalc(String com.unistack.tamboo.commons.json)

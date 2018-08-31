@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="info" packages="com.unistack.mgt">
+
+
+    <Properties>
+        <Property name="manager.logging.location">/var/logs/tamboo-mgt</Property>
+        <Property name="trigger.time.interval">10</Property>
+    </Properties>
+
+
+    <Appenders>
+        <RollingFile name="FILE" fileName="logs/tamboo-mgt.log"
+                     filePattern="${manager.logging.location}/tamboo-mgt-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>[%p %d{yyyy-MM-dd HH:mm:ss}] {%c:%L} - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="${trigger.time.interval}" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%p %d{yyyy-MM-dd HH:mm:ss}] {%c:%L} - %m%n"/>
+        </Console>
+
+
+        <RollingFile name="message-kafka" fileName="${manager.logging.location}/tamboo-message-kafka.log"
+                     filePattern="${manager.logging.location}/tamboo-message-kafka-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>[%p %d{yyyy-MM-dd HH:mm:ss}] {%c:%L} - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="${trigger.time.interval}" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+
+        <RollingFile name="collector-flume" fileName="${manager.logging.location}/tamboo-collector-flume.log"
+                     filePattern="${manager.logging.location}/tamboo-collector-flume-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>[%p %d{yyyy-MM-dd HH:mm:ss}] {%c:%L} - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="${trigger.time.interval}" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+        <RollingFile name="compute-spark"
+                     fileName="${manager.logging.location}/tamboo-compute-spark.log"
+                     filePattern="${manager.logging.location}/tamboo-compute-spark-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>[%p %d{yyyy-MM-dd HH:mm:ss}] {%c:%L} - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="${trigger.time.interval}" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+    </Appenders>
+
+
+    <Loggers>
+        <!-- kafka logger -->
+        <logger name="org.apache.kafka" level="OFF"/>
+        <logger name="org.apache.zookeeper" level="OFF"/>
+        <logger name="org.I0Itec.zkclient" level="OFF"/>
+        <logger name="org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport" level="OFF"/>
+
+        <Logger name="com.unistack.tamboo.mgt" level="INFO" additivity="false">
+            <appender-ref ref="FILE" level="INFO"/>
+        </Logger>
+
+        <Logger name="com.unistack.tamboo.mgt" level="INFO" additivity="false">
+            <appender-ref ref="console" level="INFO"/>
+        </Logger>
+
+        <Logger name="com.unistack.tamboo.message.kafka" level="INFO" additivity="false">
+            <appender-ref ref="message-kafka" level="INFO"/>
+        </Logger>
+        <Logger name="com.unistack.tamboo.sa.dc.flume" level="INFO"
+                additivity="false">
+            <appender-ref ref="collector-flume" level="INFO"/>
+        </Logger>
+        <Logger name="com.unistack.tamboo.compute" level="INFO" additivity="false">
+            <appender-ref ref="compute-spark" level="INFO"/>
+        </Logger>
+        <Root level="INFO" additivity="false">
+            <appender-ref ref="console"/>
+            <appender-ref ref="FILE"/>
+        </Root>
+    </Loggers>
+
+
+</Configuration>

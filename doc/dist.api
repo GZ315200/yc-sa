@@ -1,0 +1,41 @@
+1---启动connect任务：
+前端定义的接口参数
+{
+    "type": "mysql/oracle",
+    "fields": [{
+		"jdbc_url":"数据库连接url#string",
+  		"jdbc_username":"数据库用户名#string",
+		"jdbc_password":"数据库密码#string",
+		"table_name":"表名#string",
+		"tasks_max":"最大任务数#int",
+		"topics":"topic名称#string",
+		"whitelist":"字段白名单#string",
+		"pk_fields":"主键字段#string"
+	      }]
+}
+hdfs页面参数
+{
+    "type": "hdfs",
+    "fields": [{
+		"hdfs_url":"hdfs存储路径#string",
+		"flush_size":"刷新hdfs文件的频率#int",
+		"tasks_max":"最大任务数#int",
+		"topics":"topic名称#string"
+	      }]
+}
+
+调用DdAction.startKafkaSinkConnector(JSONObject args, String kafkaIp, String kafkaConnectPort)
+args为前端页面表单提交的参数，kafkaIp和kafkaConnectPort为kafka节点ip和connector端口(默认8083)
+
+返回格式
+{"isSucceed":boolean,"msg":string,"connectorName":"string"}
+分别代表：操作是否成功，操作返回信息，启动的connector名称(删除时需要提供)
+
+
+2---停止connect任务
+调用DdAction.stopKafkaSinkConnectorByName(String connectorName,String kafkaIp, String kafkaConnectPort)
+connectorName为停止的连接器名称，kafkaIp和kafkaConnectPort为kafka节点ip和connector端口(默认8083),
+
+返回格式
+{"isSucceed",boolean,"msg",string}
+分别代表：操作是否成功，操作返回信息

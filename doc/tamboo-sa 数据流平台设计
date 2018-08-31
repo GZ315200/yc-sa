@@ -1,0 +1,63 @@
+tamboo-sa(数据流平台)
+
+
+	## 管理平台
+	tamboo-mgt
+		com.unistack.tamboo.sa.mgt.user			用户管理
+		com.unistack.tamboo.sa.mgt.alter		告警管理
+		com.unistack.tamboo.sa.mgt.df			数据流程管理（血缘关系，）
+		com.unistack.tamboo.sa.mgt.source		数据源管理
+		com.unistack.tamboo.sa.mgt.monitor		监控管理
+		com.unistack.tamboo.sa.mgt.common		公共模块（初始化基本配置信息，动态改变配置等）
+		com.unistack.tamboo.sa.mgt.cluster		集群管理（包含存储计算资源管理）
+		com.unistack.tamboo.sa.mgt.action		具体操作模块
+			com.unistack.tamboo.sa.mgt.action.calc 
+			com.unistack.tamboo.sa.mgt.action.dc
+			com.unistack.tamboo.sa.mgt.action.mq
+			com.unistack.tamboo.sa.mgt.action.cache
+			com.unistack.tamboo.sa.mgt.action.dist
+		com.unistack.tamboo.sa.mgt.dist			数据下发模块
+		...                                     日志，异常等
+
+	## 数据接入
+	tamboo-dc
+		### 对外暴露的接口和方法
+		com.unistack.tamboo.sa.dc.invoking
+			（添加采集，删除采集，启停采集，采集监控，状态监控,采集验证）
+		### flume 采集
+		com.unistack.tamboo.sa.dc.flume
+		### kafka com.unistack.tamboo.sa.dc.connect 采集
+		com.unistack.tamboo.sa.dc.com.unistack.tamboo.sa.dc.connect
+
+	## 流数据缓存
+	tamboo-mq
+		### 对外暴露的方法
+		com.unistack.tamboo.sa.mq.invoking
+			(添加缓存,删除缓存,资源使用管理，缓存状态获取，集群状态信息)
+		### kafka 流平台
+		com.unistack.tamboo.sa.mq.kafka
+		 	(添加topic,删除topic,topic资源使用管理，topic状态获取，offset，集群状态信息,监控信息上报，异常日志，根据offset位置查找源数据)
+
+	## 计算模块
+	tamboo-calc
+		com.unistack.tamboo.sa.calc.invoking
+		(启动计算，停止计算，集群状态信息，测试验证模块)
+		com.unistack.tamboo.sa.calc.spark
+		com.unistack.tamboo.sa.calc.kstream
+
+	## 数据下发
+	tamboo-dist
+		com.unistack.tamboo.sa.dist.invoking
+		(启动数据下发，数据下发配置验证，下发程序监控，下发质量监控)
+		com.unistack.tamboo.sa.dist.db
+		com.unistack.tamboo.sa.dist.hdfs
+		com.unistack.tamboo.sa.dist.file
+
+
+	## 公共模块
+	tamboo-common
+		com.unistack.tamboo.sa.common.calc  （计算模块的基础配置）
+		com.unistack.tamboo.sa.common.dc
+		com.unistack.tamboo.sa.common.mq
+		com.unistack.tamboo.sa.common.cache
+		com.unistack.tamboo.sa.common.dist
